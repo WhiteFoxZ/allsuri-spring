@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.allsuri.mapper.CommInfoMapper">
+
+<sql id="columnCommInfo">
+CD_GROUP_ID,
+CD_GROUP_NM,
+CD_ID,
+CD_MEANING,
+LOGIN_ID,
+PRICE,
+EXT1,
+EXT2,
+EXT3,
+SORT_SEQ
+</sql>
+
+<sql id="columnCommInfoParam">
+#{CD_GROUP_ID},
+#{CD_GROUP_NM},
+#{CD_ID},
+#{CD_MEANING},
+#{LOGIN_ID},
+#{PRICE},
+#{EXT1},
+#{EXT2},
+#{EXT3},
+#{SORT_SEQ}
+
+</sql>
+
+
+
+<select id="selectCommInfoList"  resultType="HashMap">
+select * from Comm_Info limit 10
+</select>
+
+<select id="selectCommInfoListParam"  resultType="HashMap" parameterType="String">
+select * from Comm_Info where CD_GROUP_ID=#{CD_GROUP_ID}
+</select>
+
+<select id="selectCommInfoListHashMap"  resultType="HashMap" parameterType="HashMap">
+select * from Comm_Info where CD_GROUP_ID=#{CD_GROUP_ID} and CD_ID=#{CD_ID}
+</select>
+
+
+<insert id="insertCommInfo" parameterType="HashMap" >
+INSERT INTO comm_info
+(
+<include refid="columnCommInfo"></include>
+)
+VALUES
+(
+<include refid="columnCommInfoParam"></include>
+)
+</insert>
+
+
+<insert id="insertDmlCommInfo" parameterType="HashMap" >
+INSERT INTO comm_info
+(
+<include refid="columnCommInfo"></include>
+)
+VALUES
+(
+<include refid="columnCommInfoParam"></include>
+)
+</insert>
+
+</mapper>
